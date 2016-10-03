@@ -10,14 +10,25 @@
                 .then(() => {
                     weatherService
                         .getForecast()
-                        .then(res => {
-                            this.forecastData = res.data
-                            this.forecastData.list.splice(0, 1);
-                        }, err => this.displayError());
+                        .then(res => this.displayForecastData(res.data), err => this.displayError());
                 })
         }
         displayWeatherInfo(wdata) {
-            this.weatherData = wdata;
+            if (wdata.cod == 200)
+                this.weatherData = wdata;
+            else {
+                this.$uibModal.open({
+                    templateUrl: 'views/errorMessage/errorMessage.html',
+                    controller: 'errorMessage',
+                    controllerAs: 'ctrl',
+                    backdrop: 'static',
+                    resolve: {
+                        error: function () {
+                            return wdata;
+                        }
+                    }
+                });
+            }
         }
         displayError(err) {
             this.$uibModal.open({
@@ -27,6 +38,24 @@
                 backdrop: 'static'
             });
             console.error(err);
+        }
+        displayForecastData(res) {
+            if (res.cod == 200) {
+                this.forecastData = res;
+                this.forecastData.list.splice(0, 1);
+            } else {
+                this.$uibModal.open({
+                    templateUrl: 'views/errorMessage/errorMessage.html',
+                    controller: 'errorMessage',
+                    controllerAs: 'ctrl',
+                    backdrop: 'static',
+                    resolve: {
+                        error: function () {
+                            return res;
+                        }
+                    }
+                });
+            }
         }
     }
     _weatherReport.$inject = ['$stateParams', '$uibModal', 'weatherService'];

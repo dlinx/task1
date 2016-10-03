@@ -5,6 +5,6 @@ app.get('/getAPIKey', function (req, res) {
 })
 app.use(express.static(__dirname + "/build"));
 
-app.listen(app.get('port'), function () {
-  console.log('App listening on port '+app.get('port'));
+app.listen(process.env.PORT, function () {
+  console.log('App listening on port '+process.env.PORT);
 });

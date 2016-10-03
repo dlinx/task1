@@ -3,7 +3,7 @@
         constructor($http) {
             this.$http = $http;
         }
-        getWeatherInfo(_data, apiKey) {
+        getWeatherInfo(_data) {
             this.params = {};
             switch (_data.type) {
                 case 'location':
@@ -24,10 +24,9 @@
                     break;
             }
 
-            this.params.APPID = apiKey;
             this.params.units = 'metric';
             return this.$http({
-                url: 'http://api.openweathermap.org/data/2.5/weather',
+                url: '/getWeatherInfo',
                 method: "GET",
                 params: this.params
             });
@@ -35,7 +34,7 @@
         getForecast() {
             this.params.cnt = 8;
             return this.$http({
-                url: 'http://api.openweathermap.org/data/2.5/forecast/daily',
+                url: '/getForecast',
                 method: "GET",
                 params: this.params
             })

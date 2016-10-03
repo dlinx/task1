@@ -1,6 +1,6 @@
 (function () {
     class _config {
-        constructor($stateProvider,$urlRouterProvider) {
+        constructor($stateProvider, $urlRouterProvider) {
             let _homeState = {
                 name: 'home',
                 url: '/',
@@ -13,21 +13,15 @@
                 url: '/report/:type/?latitude&longitude&city&zip',
                 templateUrl: 'views/weatherReport/weatherReport.html',
                 controller: 'weatherReport',
-                controllerAs: 'weather',
-                resolve: {
-                    apiKey: function ($http) {
-                        return $http
-                            .get('/getAPIKey');
-                    }
-                }
+                controllerAs: 'weather'
             }
-            
+
             $stateProvider.state(_homeState);
             $stateProvider.state(_reportState);
-            $urlRouterProvider.when('','/');
+            $urlRouterProvider.when('', '/');
         }
     }
-    _config.$inject = ['$stateProvider','$urlRouterProvider'];
+    _config.$inject = ['$stateProvider', '$urlRouterProvider'];
     angular.module('weatherApp')
         .config(_config);
 } ());

@@ -1,11 +1,11 @@
 (function () {
     class _weatherReport {
-        constructor($stateParams, $uibModal, weatherService, apiKey) {
+        constructor($stateParams, $uibModal, weatherService) {
             this.$uibModal = $uibModal;
             this.currentDate = new Date().getTime();
             this.day = 0;
             weatherService
-                .getWeatherInfo($stateParams, apiKey.data)
+                .getWeatherInfo($stateParams)
                 .then(res => this.displayWeatherInfo(res.data), err => this.displayError(err))
                 .then(() => {
                     weatherService
@@ -29,7 +29,7 @@
             console.error(err);
         }
     }
-    _weatherReport.$inject = ['$stateParams', '$uibModal', 'weatherService', 'apiKey'];
+    _weatherReport.$inject = ['$stateParams', '$uibModal', 'weatherService'];
 
     angular.module('weatherApp')
         .controller('weatherReport', _weatherReport);

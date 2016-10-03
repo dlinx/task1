@@ -1,20 +1,25 @@
 (function () {
-    class _homeController {
-        constructor($uibModal, locationService, $state) {
-            this.$uibModal = $uibModal;
-            this.$state = $state;
-            locationService
-                .getCurrentPosition()
-                .then((e) => { this.locationSuccess(e) }, () => this.locationError())
-        }
-        locationSuccess(d) {
+    function _homeController($uibModal, locationService, $state) {
+
+        this.$uibModal = $uibModal;
+        this.$state = $state;
+        var _this = this;
+        locationService
+            .getCurrentPosition()
+            .then(function (e) {
+                _this.locationSuccess(e);
+            }, function () {
+                _this.locationError();
+            });
+
+        this.locationSuccess = function (d) {
             this.$state.go('report', {
                 type: 'location',
                 latitude: d.coords.latitude,
                 longitude: d.coords.longitude
             });
         }
-        locationError() {
+        this.locationError = function () {
             this.$uibModal.open({
                 templateUrl: 'views/getLocation/getLocation.html',
                 controller: 'getLocation',

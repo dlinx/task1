@@ -1,11 +1,11 @@
 (function () {
-    class _getLocation {
-        constructor($uibModalInstance, $state) {
-            this.type = 'City';
-            this.$state = $state;
-            this.$uibModalInstance = $uibModalInstance;
-        }
-        ok() {
+    function _getLocation($uibModalInstance, $state) {
+
+        this.type = 'City';
+        this.$state = $state;
+        this.$uibModalInstance = $uibModalInstance;
+
+        this.ok=function() {
             if (this.type === "City") {
                 this.$state.go('report', {
                     type: 'city',
@@ -21,7 +21,7 @@
             }
             this.$uibModalInstance.close();
         }
-        selectType(type) {
+        this.selectType=function(type) {
             this.type = type;
         }
     }

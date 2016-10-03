@@ -13,7 +13,6 @@
     "angular": "^1.5.8",
     "angular-ui-bootstrap": "^2.1.4",
     "angular-ui-router": "^0.3.1",
-    "es6-shim": "^0.35.1",
     "express": "^4.14.0",
     "jquery": "^3.1.1",
     "request": "^2.75.0"

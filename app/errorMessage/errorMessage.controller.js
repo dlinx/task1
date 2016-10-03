@@ -1,10 +1,9 @@
 (function () {
-    class _errorController {
-        constructor(error) {
-            this.err = 'An Error Occured while accessing weather Service.';
-            if (error) {
-                this.err = error.cod.toString()+ ": " + error.message;
-            }
+    function _errorController(error) {
+
+        this.err = 'An Error Occured while accessing weather Service.';
+        if (error) {
+            this.err = error.cod.toString() + ": " + error.message;
         }
     }
 

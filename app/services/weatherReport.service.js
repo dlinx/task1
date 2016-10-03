@@ -1,9 +1,9 @@
 (function () {
-    class _weatherService {
-        constructor($http) {
-            this.$http = $http;
-        }
-        getWeatherInfo(_data) {
+    function _weatherService($http) {
+
+        this.$http = $http;
+
+        this.getWeatherInfo = function (_data) {
             this.params = {};
             switch (_data.type) {
                 case 'location':
@@ -31,19 +31,13 @@
                 params: this.params
             });
         }
-        getForecast() {
+        this.getForecast = function () {
             this.params.cnt = 8;
             return this.$http({
                 url: '/getForecast',
                 method: "GET",
                 params: this.params
             })
-        }
-        dtof(dTemp) {
-            return dTemp * 9 / 5 + 32
-        }
-        ftod(fTemp) {
-            return (fTemp - 32) * 5 / 9;
         }
     }
 

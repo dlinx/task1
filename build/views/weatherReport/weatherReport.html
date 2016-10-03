@@ -1,0 +1,73 @@
+<div class="reportBox" ng-class="{night:(weather.currentDate>weather.weatherData.sys.sunset*1000 && weather.currentDate>weather.weatherData.sys.sunrise*1000)}" ng-if="weather.weatherData">
+    <div class="content">
+        <div>
+            <span class="flag-icon flag-icon-{{weather.weatherData.sys.country|lowercase}}"></span>
+            <h1>{{weather.weatherData.name}}</h1>
+            <div ng-if="!weather.selectedDay">
+                <div class="temperature">
+                    <div>{{(weather.weatherData.dt*1000)|date:'EEEE hh:MM a'}}</div>
+                    <b class="capitalize">{{weather.weatherData.weather[weather.day].description}}</b>
+                    <div class="big">
+                        <img ng-src="http://openweathermap.org/img/w/{{weather.weatherData.weather[0].icon}}.png" alt="">
+                        <span>
+                            {{weather.weatherData.main.temp}}&deg;<span class="super">C</span>
+                        </span>
+                    </div>
+                    <span>{{weather.weatherData.main.temp_min}} - {{weather.weatherData.main.temp_max}}</span>
+                </div>
+                <div style="display:inline-block;">
+                    <p>Pressure: {{weather.weatherData.main.pressure}} </p>
+                    <p>Humidity: {{weather.weatherData.main.humidity}} %</p>
+                    <p>
+                        Wind:
+                        <span style="transform: rotate({{weather.weatherData.wind.deg}}deg);display:inline-block;">&rarr;</span>
+                        <span>
+                            {{weather.weatherData.wind.speed}} m/s
+                        </span>
+                    </p>
+                </div>
+            </div>
+            <div ng-if="weather.selectedDay">
+                <div class="temperature">
+                    <div>{{(weather.selectedDay.dt*1000)|date:'EEEE'}}</div>
+                    <b class="capitalize">{{weather.selectedDay.weather[weather.day].description}}</b>
+                    <div class="big">
+                        <img ng-src="http://openweathermap.org/img/w/{{weather.selectedDay.weather[0].icon}}.png" alt="">
+                        <span>
+                    {{weather.selectedDay.temp.day}}&deg;<span class="super">C</span>
+                        </span>
+                    </div>
+                    <span>{{weather.selectedDay.temp.min}} - {{weather.selectedDay.temp.max}}</span>
+                </div>
+                <div style="display:inline-block;">
+                    <p>Pressure: {{weather.selectedDay.pressure}} </p>
+                    <p>Humidity: {{weather.selectedDay.humidity}} %</p>
+                    <p>
+                        Wind:
+                        <span style="transform: rotate({{weather.selectedDay.deg}}deg);display:inline-block;">&rarr;</span>
+                        <span>
+                    {{weather.selectedDay.speed}} m/s
+                </span>
+                    </p>
+                </div>
+            </div>
+
+        </div>
+        <div>
+            <ul class="btn-group">
+                <li ng-repeat="forcast in weather.forecastData.list" class="btn forecast-day" ng-model="weather.selectedDay" uib-btn-radio="forcast"
+                    uncheckable>
+                    <div>
+                        {{forcast.dt*1000|date:'EEE'}}
+                    </div>
+                    <div>
+                        <img ng-src="http://openweathermap.org/img/w/{{forcast.weather[0].icon}}.png" alt="">
+                    </div>
+                    <div>
+                        {{forcast.temp.day}}&deg;
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>

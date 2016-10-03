@@ -1,0 +1,1 @@
+angular.module('weatherApp', ['ui.bootstrap', 'ui.router']);

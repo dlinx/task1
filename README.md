@@ -13,7 +13,7 @@ To Modify source code,
 
 Install required node modules,
 
-<code>$ npm init</code>
+<code>$ npm install</code>
 
 Run gulp and express server
 <code> $ npm run dev </code>

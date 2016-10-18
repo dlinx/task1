@@ -4,7 +4,6 @@
 
 This application track user location, fetch weather data from openweathermap api and display current weather for that user. If user denies to share location information, then it asks user to manually enter location data.
 
-Demo URL : https://compucrop-weatherinfo.herokuapp.com/
 
 
 To deploy app, checkout repo, copy build directory and server.js
